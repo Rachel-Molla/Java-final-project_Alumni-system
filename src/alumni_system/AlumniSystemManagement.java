@@ -14,6 +14,7 @@ public class AlumniSystemManagement {
 	
 	OneTimePassword OTP = new OneTimePassword();
 
+
 	UserInput input = new UserInput();
 
 	
@@ -30,6 +31,7 @@ public class AlumniSystemManagement {
 	void addNewAlumnusAccount() {
 
 		IdentificationInfo keyInfo =  new IdentificationInfo(  OTP.getOneOTP(), input);
+		
 		AlumnusAccount newAlumnus = new AlumnusAccount( keyInfo.firstName, keyInfo.lastName, input, sheCodesCoursesList ); 
 		
 		alumniAccounts.put( keyInfo.idAndPassword() , newAlumnus );

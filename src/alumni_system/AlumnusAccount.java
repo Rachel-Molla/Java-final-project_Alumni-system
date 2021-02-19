@@ -9,7 +9,7 @@ public class AlumnusAccount {
 	String linkedinProfileLink; 
 	String jobSearchStatus; 
 	String[] matchJobs; 
-	String[] mentorOfCourses; 
+	ArrayList<String> mentorOfCourses = new ArrayList<>(); 
 	ArrayList<String> sheCodesCoursesList;	
 	UserInput input;
 
@@ -22,21 +22,22 @@ public class AlumnusAccount {
 		this.sheCodesCoursesList = SheCodesCoursesList;
 		addFinishedCourseToList();
 		addLinkedinLink();
+		addMentorOfCourses();
 		
 	}
 	
 	
 	void addFinishedCourseToList() {
 		
-		String finisedCourse = input.insertString( "the name of course you finished" );
+		String finishedCourse = input.insertString( "the name of course you finished" );
 		
-		if ( ! sheCodesCoursesList.contains( finisedCourse ) ) {
+		if ( ! sheCodesCoursesList.contains( finishedCourse ) )  {
 			
 			System.out.println( "there is no such course at she codes ");
 
 		} else {
 			
-			finishedCoursesList.add( finisedCourse );
+			finishedCoursesList.add( finishedCourse );
 
 		}
 		
@@ -45,33 +46,64 @@ public class AlumnusAccount {
 	
 	void addLinkedinLink() {
 		
-		String linkedinLink = input.insertString( "the link to your linkedin profile" );
+		String linkedinLink = input.insertString( "the link to your linkedin profile (if don't have insert 'None') " );
 		
-		if ( linkedinLink.startsWith( "www.linkedin.com/in/" ) ) {
+		if ( ! linkedinLink.equalsIgnoreCase( "None" ) ) {
 			
-			linkedinProfileLink = linkedinLink;
+			linkedinProfileLink = validLinkedin(linkedinLink);
 
-		} else {
+		}
+	
+	}
+	
+	
+	String validLinkedin( String userLinkedin ) {
+		
+		while ( ! userLinkedin.startsWith( "www.linkedin.com/in/" ) ) {
 			
-			System.out.println( "invalid link" );
+			System.out.println( "this is an invalid link, please try again.");
+			userLinkedin = input.insertString( "the link to your linkedin profile" );
 
 		}
 		
+		return userLinkedin;
+				
 	}
 	
 	
-	String[] requestToBeMentorOfCourses(){
+	ArrayList<String> requestToBeMentorOfCourses(){
+		
+		ArrayList<String> cousesWantToMentor = new ArrayList<>();
 
-		return new String[]{};
+		String mentor = input.insertString( "'yes' if you want be a mentor, else enter 'no' ");
+
+		if ( mentor.equalsIgnoreCase("yes") ) {
+			
+			String mentorCourses = input.insertString( "which courses you want to mentor");
+			
+			cousesWantToMentor.add( mentorCourses );
+		
+		}
+		
+		System.out.println(cousesWantToMentor);
+		
+		return cousesWantToMentor;
 
 	}
 	
-
+	
+	void addMentorOfCourses() {
+		
+		mentorOfCourses = requestToBeMentorOfCourses();
+	
+	}
+	
+	
 	@Override
 	public String toString() {
 
 		return "Alumnus [firstName=" + firstName + ", lastName=" + lastName + ", finishedCoursesList: " 
-				+ finishedCoursesList + ", linkedinProfileLink: " + linkedinProfileLink + " ]" ;
+				+ finishedCoursesList + ", linkedinProfileLink: " + linkedinProfileLink + ", Mentor of courses: " + mentorOfCourses + " ]" ;
 
 	}
 
