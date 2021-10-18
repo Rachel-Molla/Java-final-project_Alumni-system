@@ -1,8 +1,8 @@
-package alumni_system;
+package alumni_system_API;
 
 import java.util.Scanner;
 
-public class UserInput {
+public class Input {
 
 	
 	Scanner input = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class UserInput {
 
 			strInput = input.nextLine();
 
-		} while ( strInput.isEmpty() ); // check that user insert string 
+		} while ( strInput.isEmpty() ); // check insert string 
 
 		return strInput;
 

@@ -1,9 +1,10 @@
-package alumni_system;
+package alumni_system_API;
 
 import java.util.ArrayList;
 
 public class AlumnusAccount {
 	
+	String password;
 	String firstName, lastName;
 	ArrayList<String> finishedCoursesList = new ArrayList<>();
 	String linkedinProfileLink; 
@@ -11,25 +12,26 @@ public class AlumnusAccount {
 	String[] matchJobs; 
 	ArrayList<String> mentorOfCourses = new ArrayList<>(); 
 	ArrayList<String> sheCodesCoursesList;	
-	UserInput input;
+	Input userInput = new Input();
 
 
-	public AlumnusAccount( String firstName, String lastName, UserInput input, ArrayList<String> SheCodesCoursesList) {
+	public AlumnusAccount( String firstName, String lastName, String password) {
 		
 		this.firstName = firstName;
 		this.lastName = lastName; 
-		this.input = input;
-		this.sheCodesCoursesList = SheCodesCoursesList;
-		addFinishedCourseToList();
-		addLinkedinLink();
-		addMentorOfCourses();
+		this.password = password; 
+
+		//this.sheCodesCoursesList = SheCodesCoursesList;
+		//addFinishedCourseToList();
+		//addLinkedinLink();
+		//addMentorOfCourses();
 		
 	}
 	
 	
 	void addFinishedCourseToList() {
 		
-		String finishedCourse = input.insertString( "the name of course you finished" );
+		String finishedCourse = userInput.insertString( "the name of course you finished" );
 		
 		if ( ! sheCodesCoursesList.contains( finishedCourse ) )  {
 			
@@ -46,7 +48,7 @@ public class AlumnusAccount {
 	
 	void addLinkedinLink() {
 		
-		String linkedinLink = input.insertString( "the link to your linkedin profile (if don't have insert 'None') " );
+		String linkedinLink = userInput.insertString( "the link to your linkedin profile (if don't have insert 'None') " );
 		
 		if ( ! linkedinLink.equalsIgnoreCase( "None" ) ) {
 			
@@ -62,7 +64,7 @@ public class AlumnusAccount {
 		while ( ! userLinkedin.startsWith( "www.linkedin.com/in/" ) ) {
 			
 			System.out.println( "this is an invalid link, please try again.");
-			userLinkedin = input.insertString( "the link to your linkedin profile" );
+			userLinkedin = userInput.insertString( "the link to your linkedin profile" );
 
 		}
 		
@@ -75,11 +77,11 @@ public class AlumnusAccount {
 		
 		ArrayList<String> cousesWantToMentor = new ArrayList<>();
 
-		String mentor = input.insertString( "'yes' if you want be a mentor, else enter 'no' ");
+		String mentor = userInput.insertString( "'yes' if you want be a mentor, else enter 'no' ");
 
 		if ( mentor.equalsIgnoreCase("yes") ) {
 			
-			String mentorCourses = input.insertString( "which courses you want to mentor");
+			String mentorCourses = userInput.insertString( "which courses you want to mentor");
 			
 			cousesWantToMentor.add( mentorCourses );
 		
@@ -98,6 +100,43 @@ public class AlumnusAccount {
 	
 	}
 	
+	public String getFirstName() {
+		
+		return firstName;
+	
+	}
+	
+	public String getLastName() {
+		
+		return lastName;
+	
+	}
+	
+	String getPassword() {
+		
+		return password;
+	
+	}
+	
+	public ArrayList<String> getFinishedCoursesList() {
+		
+		return finishedCoursesList;
+	}
+	
+	public String getLinkedinProfileLink() {
+		
+		return linkedinProfileLink;
+	}
+	
+	public String getJobSearchStatus() {
+		
+		return jobSearchStatus;
+		
+	}
+	
+	void getAccount(){
+		toString();
+	}
 	
 	@Override
 	public String toString() {
